@@ -1,3 +1,6 @@
+# Dead-letter queue
+.dlq/
+
 # Logs
 logs
 *.log
