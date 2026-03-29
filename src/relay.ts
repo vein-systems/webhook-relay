@@ -25,3 +25,5 @@ export class WebhookRelay {
     console.log(`webhook-relay listening on ${this.config.host}:${this.config.port}`);
   }
 }
+
+// TODO: wire fastify server
