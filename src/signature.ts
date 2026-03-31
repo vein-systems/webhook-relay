@@ -11,6 +11,8 @@ export function validateSignature(
   const hmac = createHmac('sha256', secret);
   hmac.update(payload);
   const expected = formatSignature(hmac.digest('hex'), algorithm);
+  // Guard against length-discrepancy short-circuit before timingSafeEqual
+  if (Buffer.byteLength(signature) !== Buffer.byteLength(expected)) return false;
   try {
     return timingSafeEqual(Buffer.from(signature), Buffer.from(expected));
   } catch {
