@@ -4,6 +4,9 @@ export class Delivery {
   constructor(private config: RelayConfig) {}
 
   async deliver(target: Target, payload: Buffer, headers: Record<string, string>): Promise<boolean> {
+    if (!target || !target.url) {
+      throw new Error('Delivery target must have a url');
+    }
     const maxRetries = this.config.retries ?? 3;
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
       try {
@@ -18,6 +21,7 @@ export class Delivery {
           signal: AbortSignal.timeout(target.timeout ?? this.config.timeout ?? 5000),
         });
         if (resp.ok) return true;
+        // Non-2xx responses count as failure and trigger retry
       } catch {
         if (attempt === maxRetries) return false;
         await this.sleep(this.backoffMs(attempt));
