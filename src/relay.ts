@@ -1,6 +1,5 @@
 import { RelayConfig } from './types.js';
 import { Delivery } from './delivery.js';
-import { validateSignature } from './signature.js';
 
 export class WebhookRelay {
   private config: Required<RelayConfig>;
@@ -24,6 +23,8 @@ export class WebhookRelay {
   async start(): Promise<void> {
     console.log(`webhook-relay listening on ${this.config.host}:${this.config.port}`);
   }
-}
 
-// TODO: wire fastify server
+  async stop(): Promise<void> {
+    // graceful shutdown
+  }
+}
