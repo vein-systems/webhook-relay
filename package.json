@@ -11,13 +11,19 @@
     "test": "node --experimental-test-runner test/**/*.test.ts",
     "lint": "eslint src/"
   },
-  "keywords": ["webhook", "relay", "proxy", "http", "retry"],
+  "keywords": [
+    "webhook",
+    "relay",
+    "proxy",
+    "http",
+    "retry"
+  ],
   "author": "vein-systems",
   "license": "MIT",
   "dependencies": {
     "fastify": "^4.28.1",
     "pino": "^9.1.0",
-    "undici": "^6.11.0"
+    "undici": "^6.13.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.0",
