@@ -47,3 +47,14 @@ relay.start();
 ## License
 
 MIT
+
+## Graceful Shutdown
+
+Call `stop()` to drain in-flight deliveries before the process exits:
+
+```js
+process.on('SIGTERM', async () => {
+  await relay.stop();
+  process.exit(0);
+});
+```
