@@ -28,3 +28,5 @@ export class FanOut {
     );
   }
 }
+
+// fix typo in comment
