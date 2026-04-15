@@ -1,11 +1,15 @@
 import { FilterRule } from './types.js';
 
-export function applyFilters(payload: unknown, rules: FilterRule[]): boolean {
+export type FilterResult = { pass: true } | { pass: false; failedRule: FilterRule };
+
+export function applyFilters(payload: unknown, rules: FilterRule[]): FilterResult {
   for (const rule of rules) {
     const value = getNestedValue(payload, rule.field);
-    if (!matchesRule(value, rule)) return false;
+    if (!matchesRule(value, rule)) {
+      return { pass: false, failedRule: rule };
+    }
   }
-  return true;
+  return { pass: true };
 }
 
 function getNestedValue(obj: unknown, path: string): unknown {
