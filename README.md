@@ -58,3 +58,14 @@ process.on('SIGTERM', async () => {
   process.exit(0);
 });
 ```
+
+## Fan-out Delivery
+
+webhook-relay forwards each incoming webhook to all configured targets
+simultaneously. A target failure does not block other targets.
+
+Results include per-target latency:
+
+```js
+import { FanOut } from 'webhook-relay/internal';
+```
